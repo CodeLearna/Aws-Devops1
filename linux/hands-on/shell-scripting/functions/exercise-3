@@ -1,0 +1,8 @@
+#!/bin/bash
+print_age(current) {
+read -p "your date of birth : "  local birth_year
+age=(($current - local $birth_year))
+echo "you are $print_age(current) years old"
+}
+
+print_age(current)

@@ -1,0 +1,2 @@
+grep  searches  for  PATTERNS  in  each  FILE.
+PATTERNS  is  one  or more patterns separated by newline characters, and grep prints each line that matches a pattern.  

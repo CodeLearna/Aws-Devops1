@@ -1,0 +1,19 @@
+# We will create cloudformation template from the scratch
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  This template will create application Load Balancer with Auto scaling group using LT
+  
+Resources:
+  SinanSecGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: String #required
+      GroupName: String
+      SecurityGroupEgress:
+        - Egress
+      SecurityGroupIngress:
+        - Ingress
+      Tags:
+        - Tag
+      VpcId: String
+  

@@ -31,7 +31,7 @@
               wget $FOLDER.cat1.jpg
               wget $FOLDER.cat2.jpg
               systemctl start httpd
-              sytemctl enable httpdy
+              sytemctl enable httpd
         
 
 

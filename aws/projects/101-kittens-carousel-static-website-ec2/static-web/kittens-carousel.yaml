@@ -1,4 +1,68 @@
-  
+  AWSTemplateFormatVersion: 2010-09-09
+  Description: |
+   This Cloudformation Template was written for running Kittens Carousel Static Website on EC2. 
+   This website will be deployed on Linux 2 (ami-0742b4e673072066f) EC2 instance with custom security group 
+   which allows http connections on port 80 and ssh port 22 from anywhere. Kittens Carousel Static website is
+   from Public Github repository, then deployed on Apache Web Server.
+   
+  Resources:
+    myInstanceAmazonLinux2:
+      Type: AWS::EC2::Instance
+      Properties:        
+        ImageId: ami-0742b4e673072066f
+        InstanceType: t2.micro
+        KeyName: Firstkey
+        SecurityGroupIds:
+          - !Ref mySecurityGroup
+        Tags:
+          - Key: Name 
+            Value: !Sub Web Server of ${AWS::StackName} Stack
+        UserData:
+          Fn::Base64: 
+            !Sub |
+              #!/bin/bash
+              yum update -y 
+              yum install httpd -y 
+              cd var/www/html
+              FOLDER= "https://raw.githubusercontent.com/CodeLearna/Aws-Devops1/main/aws/projects/101-kittens-carousel-static-website-ec2/static-web"
+              
+              wget $FOLDER.index.html
+              wget $FOLDER.cat0.jpg
+              wget $FOLDER.cat1.jpg
+              wget $FOLDER.cat2.jpg
+              systemctl start httpd
+              sytemctl enable httpdy
+        
+
+
+    mySecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupDescription: Allows SSH and HTTP #required
+        GroupName: String
+        
+        SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        Tags:
+        - Key: keyname
+          Value: value
+        VpcId: String
+    
+ 
+    
+  Outputs:
+    Sinan'WebsiteURL:
+      Value: !Sub
+        - http://${PublicAddress}
+        - PublicAddress: !GetAtt myInstanceAmazonLinux2.PublicDnsName
+      Description: Kttens Carousel App URL 
         
     
   

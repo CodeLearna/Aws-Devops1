@@ -58,7 +58,7 @@
  
     
   Outputs:
-    Sinan'WebsiteURL:
+    SinanWebsiteURL:
       Value: !Sub
         - http://${PublicAddress}
         - PublicAddress: !GetAtt myInstanceAmazonLinux2.PublicDnsName
